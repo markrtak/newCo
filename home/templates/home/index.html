@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>newCo</title>
+    <style>
+        :root {
+            --primary-blue: #1a365d;
+            --accent-teal: #2b6c76;
+            --light-gray: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+        }
+
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            position: fixed;
+            width: 100%;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            transition: color 0.3s;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--primary-blue);
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            color: var(--primary-blue);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        #mission {
+            position: relative;
+            background: linear-gradient(135deg, var(--light-gray) 50%, #ffffff 50%);
+            border-left: 5px solid var(--accent-teal);
+        }
+
+        #mission h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        #mission h2::before {
+            content: "★";
+            position: absolute;
+            left: 0;
+            color: var(--accent-teal);
+        }
+
+        #mission > p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-style: italic;
+            background: rgba(255,255,255,0.9);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .mission-vision {
+            background-color: var(--light-gray);
+        }
+
+        .focus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .focus-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .focus-card h3 {
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+        }
+
+        .commercial-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(26, 54, 93, 0.1);
+            border-top: 4px solid var(--accent-teal);
+            transition: transform 0.3s ease;
+        }
+
+        .commercial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .commercial-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            position: relative;
+        }
+
+        .commercial-card h3::before {
+            content: "▹";
+            color: var(--accent-teal);
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                height: calc(100vh - 70px);
+                width: 100%;
+                flex-direction: column;
+                background: white;
+                padding: 2rem;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                transition: right 0.3s;
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                padding: 1.5rem;
+                border-bottom: 1px solid var(--light-gray);
+                font-size: 1.1rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+
+            #mission {
+                background: var(--light-gray);
+                border-left: none;
+                padding-top: 7rem;
+            }
+
+            #mission h2 {
+                font-size: 2rem;
+            }
+        }
+
+        .scroll-effect {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s;
+        }
+
+        .scroll-effect.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .bullet {
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">newCo</div>
+            <button class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links">
+                <a href="#mission">Mission</a>
+                <a href="#vision">Vision</a>
+                <a href="#commercial">Commercial Focus</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Transforming Digital Infrastructure</h1>
+            <p>Cloud Solutions for Healthcare & Commerce</p>
+        </div>
+    </section>
+
+    <section id="mission" class="section mission-vision scroll-effect">
+        <h2>Our Mission</h2>
+        <p>Our mission is to empower industries and communities by establishing world-class cloud computing centers in the Middle East. We strive to deliver scalable, secure, and innovative solutions tailored for both the healthcare and commercial sectors. By leveraging cloud technology, we enable remote medical support, enhance clinical decision-making, and provide businesses with the tools to accelerate digital transformation, foster innovation, and drive sustainable growth.</p>
+        <div class="focus-grid">
+            <div class="focus-card">
+                <h3>Infrastructure Development</h3>
+                <p>Building cloud computing hubs in the Middle East</p>
+            </div>
+            <div class="focus-card">
+                <h3>Dual Focus</h3>
+                <p>Catering to both healthcare and commercial sectors</p>
+            </div>
+            <div class="focus-card">
+                <h3>Technology as an Enabler</h3>
+                <p>Supporting medical and business needs through advanced cloud platforms</p>
+            </div>
+            <div class="focus-card">
+                <h3>Scalability and Security</h3>
+                <p>Providing reliable and secure cloud solutions for diverse industries.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="vision" class="section scroll-effect">
+        <h2>Our Vision</h2>
+        <p>Our vision is to be a global leader in cloud-driven solutions, transforming the way businesses and healthcare systems operate. We aspire to bridge the gap in digital infrastructure, enabling equitable access to cutting-edge technology across the Middle East and beyond. By fostering innovation and collaboration, we aim to create a thriving ecosystem where businesses can scale, healthcare becomes universally accessible, and technology drives positive change for people and organizations alike.
+            <br><b>This vision highlights:</b>  
+                <br><span class="bullet">• Global Leadership:</span> Aiming to be at the forefront of cloud-based innovation.
+                <br><span class="bullet">• Comprehensive Applications:</span> Supporting both commercial enterprises and healthcare.
+                <br><span class="bullet">• Infrastructure Equity:</span> Building cloud systems where they are most needed.
+                <br><span class="bullet">• Sustainability and Growth:</span> Helping organizations scale while prioritizing sustainable practices.</p>
+    </section>
+
+    <section id="commercial" class="section mission-vision scroll-effect">
+        <h2>Commercial Focus</h2>
+        <div class="focus-grid">
+            <div class="commercial-card">
+                <h3>Digital Transformation for businesses</h3>
+                <p>• Cloud centers designed to meet the needs of industries such as retail, finance, manufacturing, logistics, and technology.
+                    <br>• Offering tools for data storage, real-time analytics, and operational optimization.</p>
+            </div>
+            <div class="commercial-card">
+                <h3>Empowering Startups and SMEs</h3>
+                <p>• Providing scalable cloud resources to enable small and medium businesses to compete in the digital economy.</p>
+            </div>            
+            <div class="commercial-card">
+                <h3>Driving Innovation Across Sectors</h3>
+                <p>• Enabling businesses to adopt AI, IoT, and big data solutions through robust cloud infrastructure.
+                    <br>• Supporting industries in achieving greater operational efficiency and innovation.</p>            
+            </div>
+            <div class="commercial-card">
+                <h3>Sustainability for Commercial Growth</h3>
+                <p>• Promoting green data center initiatives to help businesses meet sustainability goals while leveraging advanced cloud resources.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        const body = document.body;
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            body.classList.toggle('no-scroll');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                body.classList.remove('no-scroll');
+            }
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                body.classList.remove('no-scroll');
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.scroll-effect').forEach((element) => {
+            observer.observe(element);
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
